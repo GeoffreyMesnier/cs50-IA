@@ -55,7 +55,6 @@ def load_data(directory):
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
-    #directory = sys.argv[1] if len(sys.argv) == 2 else "small"
     directory = sys.argv[1] if len(sys.argv) == 2 else "large"
 
     # Load data from files into memory
@@ -92,57 +91,6 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-    # Variable pour le nombre d'exploration
-    nombre_exploration = 0
-
-    # Liste contenant la solution a retourner
-    solution=[]
-    # Creation de la node de la source
-    node_debut = Node(source,parent=None,action=None)
-
-    # Initialise la frontiere
-    frontiere = QueueFrontier()
-
-    # Ajout de la node de départ a la frontiere
-    frontiere.add(node_debut)
-
-    # Creation du set d'exploration
-    exploration = set()
-
-    #  Boucle de recherche de la solution
-    while True:
-        # Test si la frontiere on renvoi None (pas de solution)
-        if frontiere.empty():
-            return None
-        # Choix d'une node dans la frontier
-        node = frontiere.remove()
-        # Increment la variable d'exploration
-        nombre_exploration += 1
-        print(nombre_exploration)
-        # Test si on a trouve la destination
-        # On rempli les tableaux de resultat
-        if node.state == target:
-            node_temp = node
-            actions = []
-            cells = []
-            while node.parent is not None:
-                actions.append(node.action)
-                cells.append(node.state)
-                node = node.parent
-            actions.reverse()
-            cells.reverse()
-            for element in range(len(actions)):
-                solution.append((actions[element], cells[element]))
-            return solution
-
-        #Ajout de la node au explorer
-        exploration.add(node.state)
-
-        #Ajout des voisins a la frontiere
-        for movie, person in neighbors_for_person(node.state):
-            if not frontiere.contains_state(person) and person not in exploration:
-                child = Node(state=person, parent=node, action=movie)
-                frontiere.add(child)
 
     # TODO
     raise NotImplementedError
